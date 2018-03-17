@@ -8,14 +8,23 @@
 #include <iostream>
 #include "Individual.h"
 #include "Population.h"
+#include "FitnessCalculation.h"
 
+bool tester(){
+
+    int length = 15;
+    int populationSize = 20;
+
+    FitnessCalculation::generateASolution(15);
+    Individual individual(true);
+    Population population(populationSize, length);
+
+    return true;
+}
 
 int main()
 {
     std::cout <<" Hello world!" << std::endl;
-
-    Individual individual(true);
-    Population population(25, 15);
-
+    tester();
     return 0;
 }
