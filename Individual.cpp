@@ -12,11 +12,11 @@ Individual::Individual(): _fitness(0)
 
 }
 
-Individual::Individual(const bool isRandom): _fitness(0)
+Individual::Individual(unsigned int length): _fitness(0)
 {
-    _chromosome.resize(_geneLength);
+    _chromosome.resize(length);
     srand(time(0));
-    for(unsigned int i = 0; i < _geneLength; ++i){
+    for(unsigned int i = 0; i < length; ++i){
         _chromosome[i] = rand() % 2; 
         std::cout << _chromosome[i];
     }
@@ -43,8 +43,18 @@ void Individual::setGene(const unsigned int index, const bool geneValue)
 
 int Individual::getFitness() { 
     if(_fitness == 0) {
-        //_fitness = FitnessCalculation(this);
+        //_fitness = FitnessCalculation::getFitness(this);
         int l;
     }
+    _fitness = 5;
     return _fitness;
+}
+
+std::vector<bool> Individual::getChromosome() const
+{
+    return _chromosome;
+}
+
+unsigned int Individual::size() const{
+    return _chromosome.size();
 }
