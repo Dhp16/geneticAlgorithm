@@ -9,7 +9,7 @@ class FitnessCalculation
 {
   public:
     static void setSolution(const std::vector<bool> &solution);
-    static int getFitness(Individual individual);
+    static int getFitness(const std::vector<bool>& individual);
     static int getMaxFitness();
     static void generateASolution(const unsigned int length);
 

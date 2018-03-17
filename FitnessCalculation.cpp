@@ -12,7 +12,7 @@ void FitnessCalculation::setSolution(const std::vector<bool>& solution)
     _solution = solution;
 } 
 
-int FitnessCalculation::getFitness(Individual individual)
+int FitnessCalculation::getFitness(const std::vector<bool>& individual)
 {
     int fitness = 0;
     for(unsigned int i = 0; i < individual.size(); ++i) {

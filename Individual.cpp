@@ -1,5 +1,5 @@
 #include "Individual.h"
-//#include "FitnessCalculation.h"
+#include "FitnessCalculation.h"
 
 #include <ctime>
 
@@ -43,7 +43,7 @@ void Individual::setGene(const unsigned int index, const bool geneValue)
 
 int Individual::getFitness() { 
     if(_fitness == 0) {
-        //_fitness = FitnessCalculation::getFitness(this);
+        _fitness = FitnessCalculation::getFitness(_chromosome);
         int l;
     }
     _fitness = 5;

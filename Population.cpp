@@ -9,6 +9,7 @@ Population::Population(unsigned int size, unsigned int length)
 {
     for(unsigned int i = 0; i < size; ++i) {
         Individual newIndividual(length);
+        newIndividual.getFitness();
         _individuals.push_back(newIndividual);
     }
 }
