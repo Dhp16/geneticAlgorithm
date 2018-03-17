@@ -28,3 +28,7 @@ Individual Population::getFittestIndividual()
     return _individuals[indexForStrongestIndividual];
 }
 
+int Population::size() const {
+    return _individuals.size();
+}
+
