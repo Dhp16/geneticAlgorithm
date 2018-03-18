@@ -12,6 +12,15 @@ void FitnessCalculation::setSolution(const std::vector<bool>& solution)
     _solution = solution;
 } 
 
+void FitnessCalculation::printSolution()
+{
+    std::cout <<"Solution: " << std::endl;
+    for(unsigned int i = 0; i < _solution.size(); ++i) {
+        std::cout << _solution[i];
+    }
+    std::cout << std::endl;
+}
+
 int FitnessCalculation::getFitness(const std::vector<bool>& individual)
 {
     int fitness = 0;
@@ -20,6 +29,7 @@ int FitnessCalculation::getFitness(const std::vector<bool>& individual)
             fitness++;
         }
     }
+    std::cout << "fitness of individual: " << fitness << std::endl; 
     return fitness;
 }
 int FitnessCalculation::getMaxFitness() {

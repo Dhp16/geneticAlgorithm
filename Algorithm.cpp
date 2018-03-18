@@ -17,7 +17,7 @@ Algorithm::Algorithm(unsigned int length) : _length(length)
 
 Population Algorithm::evolvePopulation(Population population)
 {
-
+    
     if (elitism)
     {
         // would write function to save the fittest individual

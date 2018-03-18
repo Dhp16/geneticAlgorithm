@@ -12,6 +12,7 @@ class FitnessCalculation
     static int getFitness(const std::vector<bool>& individual);
     static int getMaxFitness();
     static void generateASolution(const unsigned int length);
+    static void printSolution(); 
 
   private:
     static std::vector<bool> _solution;

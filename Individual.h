@@ -2,12 +2,14 @@
 #define INDIVIDUAL_H
 
 #include <vector>
+#include <ctime>
 
 class Individual {
 
   public:
     Individual();
-    Individual(unsigned int length);
+    Individual(const unsigned int length);
+    Individual(unsigned int length, const bool generate);
     ~Individual();
 
     bool getGene(const unsigned int index) const;
@@ -15,6 +17,7 @@ class Individual {
     int getFitness();
     std::vector<bool> getChromosome() const;
     unsigned int size() const;
+    void print() const;
 
     bool operator[](unsigned int x) {
       return _chromosome[x];

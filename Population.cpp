@@ -9,8 +9,10 @@ Population::Population()
 
 Population::Population(unsigned int size, unsigned int length)
 {
-    for(unsigned int i = 0; i < size; ++i) {
-        Individual newIndividual(length);
+    for(int i = 0; i < size; ++i) {
+        long int k = i;
+        time_t seededTime = time(&k);
+        Individual newIndividual(length, true);
         newIndividual.getFitness();
         _individuals.push_back(newIndividual);
     }
@@ -40,4 +42,12 @@ int Population::size() const {
 
 void Population::addIndividual(const Individual& individual){
     _individuals.push_back(individual);
+}
+
+void Population::print() const
+{
+    for(unsigned int i = 0; i < _individuals.size(); ++i) {
+        _individuals[i].print();
+    }
+    std::cout << std::endl;
 }
