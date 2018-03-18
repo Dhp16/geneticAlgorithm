@@ -1,6 +1,6 @@
-//    This is pretty much an exact replica of the code which can be found:
+//    This is a close replica of the code which can be found:
 //    http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
-//    except that this is c++ and the one above if Java.    
+//    except that this is c++ and the one above is Java.    
 //    I was looking for a starting point to learn about GAs, please visit the above page for information
 //    All credit to: Lee from theprojectspot.com
 
@@ -9,6 +9,7 @@
 #include "Individual.h"
 #include "Population.h"
 #include "FitnessCalculation.h"
+#include "Algorithm.h"
 
 bool tester(){
 
@@ -22,9 +23,30 @@ bool tester(){
     return true;
 }
 
+void realRun() {
+    int length = 15;
+    int populationSize = 20;
+
+    FitnessCalculation::generateASolution(length);
+    Population newPopulation(populationSize, length);
+
+    int generationCount = 0;
+    Algorithm algo(length);
+    // std::cout << "maxFitness: "<< FitnessCalculation::getMaxFitness() << std::endl;
+    // newPopulation = algo.evolvePopulation(newPopulation);
+    
+    while(newPopulation.getFittestIndividual().getFitness() < FitnessCalculation::getMaxFitness()) {
+       generationCount++;
+       newPopulation = algo.evolvePopulation(newPopulation);
+       std::cout << newPopulation.getFittestIndividual().getFitness() << std::endl;
+    }
+    // not getting any better 
+}
+
 int main()
 {
-    std::cout <<" Hello world!" << std::endl;
-    tester();
+    //tester();
+    realRun();
+
     return 0;
 }

@@ -1,5 +1,7 @@
 #include "Population.h"
 
+#include <iostream>
+
 Population::Population()
 {
 

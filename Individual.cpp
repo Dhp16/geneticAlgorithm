@@ -6,6 +6,7 @@
 #include <iostream> 
 
 
+
 Individual::Individual(): _fitness(0)
 {   
 
@@ -18,7 +19,6 @@ Individual::Individual(unsigned int length): _fitness(0)
     srand(time(0));
     for(unsigned int i = 0; i < length; ++i){
         _chromosome[i] = rand() % 2; 
-        std::cout << _chromosome[i];
     }
 }
 
