@@ -23,7 +23,7 @@ class Algorithm
         unsigned int _length;
         double _uniformRate = 0.5;
         double _mutationRate = 0.002;
-        int _tournamentSize = 5;
+        int _tournamentSize = 15;
         bool elitism = false;
 };
 

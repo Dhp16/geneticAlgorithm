@@ -26,8 +26,7 @@ Population Algorithm::evolvePopulation(const Population& population)
         offset++;
     }
 
-    for (unsigned int i = offset; i < population.size(); ++i)
-    {
+    for (unsigned int i = offset; i < population.size(); ++i) {
         Individual individual1 = tournamentSelection(population);
         Individual individual2 = tournamentSelection(population);
         Individual newIndividual = crossover(individual1, individual2);

@@ -15,6 +15,7 @@
 #include "FitnessCalculation.h"
 #include "Algorithm.h"
 
+const int GLOBAL_LOGLEVEL = 1;
 
 inline double rand01()
 {
@@ -40,35 +41,41 @@ void realRun() {
     myFile.open("Fitness.txt");
 
     FitnessCalculation::generateASolution(length);
-    FitnessCalculation::printSolution();
+    if(GLOBAL_LOGLEVEL > 1) {
+        std::cout << "Generated Solution: " << std::endl;
+        FitnessCalculation::printSolution();
+    }
 
     Population newPopulation(populationSize, length);
-    std::cout <<"First population: size: " << populationSize <<"  length: " << length << std::endl;
-    newPopulation.print();
-    std::cout <<"First population max fitness: " << newPopulation.getFittestIndividual().getFitness()<< "\n" << std::endl;
+    if(GLOBAL_LOGLEVEL > 0) {
+        std::cout << "First population: size: " << populationSize << "  length: " << length << std::endl;
+        if(GLOBAL_LOGLEVEL > 1) newPopulation.print();
+        std::cout << "First population max fitness: " << newPopulation.getFittestIndividual().getFitness() << "\n" << std::endl;
+    }
     myFile << newPopulation.getFittestIndividual().getFitness() << std::endl;
 
     int generationCount = 0;
 
-    // initialise algorithm
     Algorithm algo(length);
     
     while(newPopulation.getFittestIndividual().getFitness() < FitnessCalculation::getMaxFitness()) {
        generationCount++;
-       std::cout <<"\n======== Population " << generationCount << " ========" << std::endl;
+       if(GLOBAL_LOGLEVEL > 0) std::cout <<"\n======== Population " << generationCount << " ========" << std::endl;
        newPopulation = algo.evolvePopulation(newPopulation);
-       newPopulation.print();
-       std::cout << "max fitness: " << newPopulation.getFittestIndividual().getFitness() << std::endl;
+       if(GLOBAL_LOGLEVEL > 1) newPopulation.print();
+       if(GLOBAL_LOGLEVEL > 0) std::cout << "max fitness: " << newPopulation.getFittestIndividual().getFitness() << std::endl;
        myFile << newPopulation.getFittestIndividual().getFitness() << std::endl;
     }
     myFile.close();
 
-    std::cout <<"\n\n======= SUCCESS =======" << std::endl;
-    std::cout <<"Generations required: " << generationCount << std::endl;
-    std::cout <<"Solution found:   ";
-    newPopulation.getFittestIndividual().print();
-    std::cout <<"Initial solution: "; 
-    FitnessCalculation::printSolution();
+    if(GLOBAL_LOGLEVEL > 0)std::cout <<"\n\n======= SUCCESS =======" << std::endl;
+    if(GLOBAL_LOGLEVEL > 0)std::cout <<"Generations required: " << generationCount << std::endl;
+    if(GLOBAL_LOGLEVEL > 1){
+        std::cout << "Solution found:   ";
+        newPopulation.getFittestIndividual().print();
+        std::cout << "Initial solution: ";
+        FitnessCalculation::printSolution();
+    }
 
     std::cout << "\n\n\n" << std::endl;
 }
