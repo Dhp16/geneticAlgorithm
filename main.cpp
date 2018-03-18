@@ -1,8 +1,9 @@
-//    This is a close replica of the code which can be found:
+//    A large part of this code is a replica from that shared here:
 //    http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
 //    except that this is c++ and the one above is Java.    
-//    I was looking for a starting point to learn about GAs, please visit the above page for information
-//    All credit to: Lee from theprojectspot.com
+//    I was looking for a starting point to learn about GAs
+//    All credit to: Lee from theprojectspot.com whom I thank for very clear introductory code 
+//    for genetic algorithms
 
 
 #include <iostream>
@@ -19,7 +20,6 @@ inline double rand01()
 {
     return ((double)rand() / (RAND_MAX));
 }
-
 
 bool tester(){
     int length = 15;
