@@ -18,10 +18,11 @@ Algorithm::Algorithm(unsigned int length) : _length(length)
 Population Algorithm::evolvePopulation(Population population)
 {
 
-    if (elitism)
-    {
-        // would write function to save the fittest individual
-    }
+        std::cout <<"Starting the evolve" << std::endl;
+    // if (elitism)
+    // {
+    //     // would write function to save the fittest individual
+    // }
 
     Population newPopulation;
     for (unsigned int i = 0; i < population.size(); ++i)
@@ -41,7 +42,7 @@ Individual Algorithm::tournamentSelection(Population population)
     Population tournament(_tournamentSize, _length);
     for (unsigned int i = 0; i < _tournamentSize; ++i)
     {
-        int randomIndex = (rand() % static_cast<int>(population.size() + 1));
+        int randomIndex = (rand() % static_cast<int>(population.size()));
         tournament.addIndividual(population.getIndividual(randomIndex));
     }
 

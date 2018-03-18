@@ -39,23 +39,29 @@ void realRun() {
     FitnessCalculation::printSolution();
 
     Population newPopulation(populationSize, length);
-    std::cout <<"First population: " << std::endl;
+    std::cout <<"First population: size: " << populationSize <<"  length: " << length << std::endl;
     newPopulation.print();
     std::cout <<"First population max fitness: " << newPopulation.getFittestIndividual().getFitness()<< "\n" << std::endl;
 
     int generationCount = 0;
+
+    // initialise algorithm
     Algorithm algo(length);
-    // std::cout << "maxFitness: "<< FitnessCalculation::getMaxFitness() << std::endl;
-    // newPopulation = algo.evolvePopulation(newPopulation);
     
     while(newPopulation.getFittestIndividual().getFitness() < FitnessCalculation::getMaxFitness()) {
        generationCount++;
-       std::cout <<"\nPopulation " << generationCount <<":" << std::endl;
+       std::cout <<"\n======== Population " << generationCount << "========" << std::endl;
        newPopulation = algo.evolvePopulation(newPopulation);
        newPopulation.print();
        std::cout << "max fitness: " << newPopulation.getFittestIndividual().getFitness() << std::endl;
     }
-    // not getting any better 
+    std::cout <<"\n\n======= SUCCESS =======" << std::endl;
+    std::cout <<"Generations required: " << generationCount << std::endl;
+    std::cout <<"Solution found:   ";
+    newPopulation.getFittestIndividual().print();
+    std::cout <<"Initial solution: "; 
+    FitnessCalculation::printSolution();
+    
 }
 
 int main()

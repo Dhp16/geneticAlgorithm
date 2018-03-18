@@ -3,8 +3,6 @@
 
 #include <iostream> 
 
-
-
 Individual::Individual(): _fitness(0)
 {   
 

@@ -14,7 +14,6 @@ void FitnessCalculation::setSolution(const std::vector<bool>& solution)
 
 void FitnessCalculation::printSolution()
 {
-    std::cout <<"Solution: " << std::endl;
     for(unsigned int i = 0; i < _solution.size(); ++i) {
         std::cout << _solution[i];
     }
