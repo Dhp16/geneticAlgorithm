@@ -22,7 +22,7 @@ class Algorithm
     
         unsigned int _length;
         double _uniformRate = 0.5;
-        double _mutationRate = 0.015;
+        double _mutationRate = 0.002;
         int _tournamentSize = 5;
         bool elitism = false;
 };

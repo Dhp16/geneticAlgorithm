@@ -18,6 +18,7 @@ class Individual {
     std::vector<bool> getChromosome() const;
     unsigned int size() const;
     void print() const;
+    void flip(const unsigned int index);
 
     bool operator[](unsigned int x) {
       return _chromosome[x];

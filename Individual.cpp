@@ -59,3 +59,7 @@ void Individual::print() const {
     }
     std::cout << std::endl;
 }
+
+void Individual::flip(const unsigned int index) {
+    _chromosome[index] = !_chromosome[index];
+}

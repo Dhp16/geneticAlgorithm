@@ -51,3 +51,7 @@ void Population::print() const
     }
     std::cout << std::endl;
 }
+
+void Population::setIndividual(const unsigned int index, const Individual& newIndividual) {
+    _individuals[index] = newIndividual;
+}

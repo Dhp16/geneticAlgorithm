@@ -15,6 +15,7 @@ class Population
         void addIndividual(const Individual& individual);
         Individual getIndividual(const unsigned int index);
         void print() const;
+        void setIndividual(const unsigned int index, const Individual& newIndividual);
 
     private:
         std::vector<Individual> _individuals;        

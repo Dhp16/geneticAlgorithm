@@ -22,6 +22,7 @@ Population Algorithm::evolvePopulation(Population population)
     //     // would write function to save the fittest individual
     // }
 
+    // breeding phase
     Population newPopulation;
     for (unsigned int i = 0; i < population.size(); ++i)
     {
@@ -30,6 +31,14 @@ Population Algorithm::evolvePopulation(Population population)
         Individual newIndividual = crossover(individual1, individual2);
         newPopulation.addIndividual(newIndividual);
     }
+
+    // mutation phase
+    for(unsigned int i = 0; i < population.size(); ++i) {
+        Individual newIndividual = newPopulation.getIndividual(i);
+        mutate(newIndividual);
+        newPopulation.setIndividual(i, newIndividual); 
+    }
+    
 
     return newPopulation;
 }
@@ -70,7 +79,7 @@ void Algorithm::mutate(Individual &individual)
     {
         if (rand01() < _mutationRate)
         {
-            individual.setGene(i, rand() % 2);
+            individual.flip(i);
         }
     }
 }

@@ -22,8 +22,8 @@ inline double rand01()
 }
 
 bool tester(){
-    int length = 15;
-    int populationSize = 20;
+    int length = 150;
+    int populationSize = 30;
 
     FitnessCalculation::generateASolution(15);
     Population population(populationSize, length);
@@ -32,8 +32,8 @@ bool tester(){
 }
 
 void realRun() {
-    int length = 15;
-    int populationSize = 10;
+    int length = 150;
+    int populationSize = 30;
 
     // initialise file writing for fitness plot:
     std::ofstream myFile;
