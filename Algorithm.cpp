@@ -1,5 +1,9 @@
 #include "Algorithm.h"
 
+#include <ctime>
+#include <iostream>
+
+
 #include "Individual.h"
 #include "Population.h"
 
@@ -21,6 +25,7 @@ Population Algorithm::evolvePopulation(Population population) {
     return newPopulation;
 }
 
+// check the way tournament works
 Individual Algorithm::tournamentSelection(Population population) {
 
     Individual newIndividual;
@@ -38,4 +43,13 @@ Individual Algorithm::crossover(Individual individual1, Individual individual2) 
     Individual newIndividual;
 
     return newIndividual; 
+}
+
+void Algorithm::mutate(Individual& individual) {
+    for(unsigned int i = 0; i < individual.size(); ++i) {
+        // get random double 
+        if(((double) rand() / (RAND_MAX)) < _mutationRate) {
+            individual.setGene(i, rand() % 2);
+        }
+    }
 }
