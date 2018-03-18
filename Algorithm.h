@@ -11,11 +11,11 @@ class Algorithm
     public:
         Algorithm(unsigned int length);
 
-        Population evolvePopulation(Population population);
+        Population evolvePopulation(const Population& population);
         
-        Individual tournamentSelection(Population population);
+        Individual tournamentSelection(const Population& population);
 
-        Individual crossover(Individual individual1, Individual individual2);
+        Individual crossover(const Individual& individual1, const Individual& individual2);
         void mutate(Individual& individual);
 
     private:

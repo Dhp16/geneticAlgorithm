@@ -3,17 +3,17 @@
 
 #include <iostream> 
 
-Individual::Individual(): _fitness(0)
+Individual::Individual()
 {   
 
 
 }
-Individual::Individual(const unsigned int length): _fitness(0)
+Individual::Individual(const unsigned int length)
 {
     _chromosome.resize(length);
 }
 
-Individual::Individual(unsigned int length, const bool generate): _fitness(0)
+Individual::Individual(unsigned int length, const bool generate)
 {
     _chromosome.resize(length);
     for(unsigned int i = 0; i < length; ++i){
@@ -40,7 +40,7 @@ void Individual::setGene(const unsigned int index, const bool geneValue)
     _chromosome[index] = geneValue;
 }
 
-int Individual::getFitness() {
+int Individual::getFitness() const{
     return FitnessCalculation::getFitness(_chromosome);
 }
 

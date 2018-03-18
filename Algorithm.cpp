@@ -15,21 +15,23 @@ Algorithm::Algorithm(unsigned int length) : _length(length)
 {
 }
 
-Population Algorithm::evolvePopulation(Population population)
+Population Algorithm::evolvePopulation(const Population& population)
 {
-    // if (elitism)
-    // {
-    //     // would write function to save the fittest individual
-    // }
-
     // breeding phase
     Population newPopulation;
-    for (unsigned int i = 0; i < population.size(); ++i)
+
+    int offset = 0;
+    if (elitism) {
+        newPopulation.addIndividual(population.getFittestIndividual());
+        offset++;
+    }
+
+    for (unsigned int i = offset; i < population.size(); ++i)
     {
         Individual individual1 = tournamentSelection(population);
         Individual individual2 = tournamentSelection(population);
         Individual newIndividual = crossover(individual1, individual2);
-        newPopulation.addIndividual(newIndividual);
+        newPopulation.addIndividual(newIndividual); 
     }
 
     // mutation phase
@@ -44,7 +46,7 @@ Population Algorithm::evolvePopulation(Population population)
 }
 
 // selects best from a random subset of the population
-Individual Algorithm::tournamentSelection(Population population)
+Individual Algorithm::tournamentSelection(const Population& population)
 {
     Population tournament(_tournamentSize, _length);
     for (unsigned int i = 0; i < _tournamentSize; ++i)
@@ -56,7 +58,7 @@ Individual Algorithm::tournamentSelection(Population population)
     return tournament.getFittestIndividual();
 }
 
-Individual Algorithm::crossover(Individual individual1, Individual individual2)
+Individual Algorithm::crossover(const Individual& individual1, const Individual& individual2)
 {
     Individual newIndividual(_length);
     for (unsigned int i = 0; i < _length; ++i)

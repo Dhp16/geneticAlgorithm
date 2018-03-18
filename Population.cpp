@@ -18,7 +18,7 @@ Population::Population(unsigned int size, unsigned int length)
     }
 }
 
-Individual Population::getFittestIndividual()
+Individual Population::getFittestIndividual() const
 {
     int indexForStrongestIndividual; 
     int maxFitness = 0;
@@ -32,7 +32,7 @@ Individual Population::getFittestIndividual()
     return _individuals[indexForStrongestIndividual];
 }
 
-Individual Population::getIndividual(const unsigned int index) {
+Individual Population::getIndividual(const unsigned int index) const {
     return _individuals[index];
 }
 

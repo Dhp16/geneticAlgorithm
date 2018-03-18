@@ -10,10 +10,10 @@ class Population
         Population();
         Population(const unsigned int size, unsigned int length);
 
-        Individual getFittestIndividual();
+        Individual getFittestIndividual() const;
         int size() const;
         void addIndividual(const Individual& individual);
-        Individual getIndividual(const unsigned int index);
+        Individual getIndividual(const unsigned int index) const;
         void print() const;
         void setIndividual(const unsigned int index, const Individual& newIndividual);
 

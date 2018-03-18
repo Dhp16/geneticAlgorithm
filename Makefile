@@ -14,3 +14,4 @@ $(TARGET): $(OBJ)
 
 run: $(TARGET)
 	./$(TARGET)
+	python3 plot.py
