@@ -29,7 +29,6 @@ int FitnessCalculation::getFitness(const std::vector<bool>& individual)
             fitness++;
         }
     }
-    std::cout << "fitness of individual: " << fitness << std::endl; 
     return fitness;
 }
 int FitnessCalculation::getMaxFitness() {

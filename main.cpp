@@ -41,7 +41,7 @@ void realRun() {
     Population newPopulation(populationSize, length);
     std::cout <<"First population: " << std::endl;
     newPopulation.print();
-    std::cout <<"First population max fitness: " << newPopulation.getFittestIndividual().getFitness() << std::endl;
+    std::cout <<"First population max fitness: " << newPopulation.getFittestIndividual().getFitness()<< "\n" << std::endl;
 
     int generationCount = 0;
     Algorithm algo(length);
@@ -50,9 +50,10 @@ void realRun() {
     
     while(newPopulation.getFittestIndividual().getFitness() < FitnessCalculation::getMaxFitness()) {
        generationCount++;
+       std::cout <<"\nPopulation " << generationCount <<":" << std::endl;
        newPopulation = algo.evolvePopulation(newPopulation);
        newPopulation.print();
-       std::cout << newPopulation.getFittestIndividual().getFitness() << std::endl;
+       std::cout << "max fitness: " << newPopulation.getFittestIndividual().getFitness() << std::endl;
     }
     // not getting any better 
 }

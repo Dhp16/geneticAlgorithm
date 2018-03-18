@@ -17,7 +17,7 @@ Algorithm::Algorithm(unsigned int length) : _length(length)
 
 Population Algorithm::evolvePopulation(Population population)
 {
-    
+
     if (elitism)
     {
         // would write function to save the fittest individual
@@ -69,7 +69,6 @@ void Algorithm::mutate(Individual &individual)
 {
     for (unsigned int i = 0; i < individual.size(); ++i)
     {
-        // get random double
         if (rand01() < _mutationRate)
         {
             individual.setGene(i, rand() % 2);
