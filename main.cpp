@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <ctime>
+#include <fstream>
 
 #include "Individual.h"
 #include "Population.h"
@@ -21,7 +22,6 @@ inline double rand01()
 
 
 bool tester(){
-
     int length = 15;
     int populationSize = 20;
 
@@ -32,8 +32,12 @@ bool tester(){
 }
 
 void realRun() {
-    int length = 5;
+    int length = 15;
     int populationSize = 10;
+
+    // initialise file writing for fitness plot:
+    std::ofstream myFile;
+    myFile.open("Fitness.txt");
 
     FitnessCalculation::generateASolution(length);
     FitnessCalculation::printSolution();
@@ -42,6 +46,7 @@ void realRun() {
     std::cout <<"First population: size: " << populationSize <<"  length: " << length << std::endl;
     newPopulation.print();
     std::cout <<"First population max fitness: " << newPopulation.getFittestIndividual().getFitness()<< "\n" << std::endl;
+    myFile << newPopulation.getFittestIndividual().getFitness() << std::endl;
 
     int generationCount = 0;
 
@@ -50,18 +55,22 @@ void realRun() {
     
     while(newPopulation.getFittestIndividual().getFitness() < FitnessCalculation::getMaxFitness()) {
        generationCount++;
-       std::cout <<"\n======== Population " << generationCount << "========" << std::endl;
+       std::cout <<"\n======== Population " << generationCount << " ========" << std::endl;
        newPopulation = algo.evolvePopulation(newPopulation);
        newPopulation.print();
        std::cout << "max fitness: " << newPopulation.getFittestIndividual().getFitness() << std::endl;
+       myFile << newPopulation.getFittestIndividual().getFitness() << std::endl;
     }
+    myFile.close();
+
     std::cout <<"\n\n======= SUCCESS =======" << std::endl;
     std::cout <<"Generations required: " << generationCount << std::endl;
     std::cout <<"Solution found:   ";
     newPopulation.getFittestIndividual().print();
     std::cout <<"Initial solution: "; 
     FitnessCalculation::printSolution();
-    
+
+    std::cout << "\n\n\n" << std::endl;
 }
 
 int main()

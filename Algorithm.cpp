@@ -17,8 +17,6 @@ Algorithm::Algorithm(unsigned int length) : _length(length)
 
 Population Algorithm::evolvePopulation(Population population)
 {
-
-        std::cout <<"Starting the evolve" << std::endl;
     // if (elitism)
     // {
     //     // would write function to save the fittest individual
