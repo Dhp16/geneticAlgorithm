@@ -28,7 +28,14 @@ Individual Population::getFittestIndividual()
     return _individuals[indexForStrongestIndividual];
 }
 
+Individual Population::getIndividual(const unsigned int index) {
+    return _individuals[index];
+}
+
 int Population::size() const {
     return _individuals.size();
 }
 
+void Population::addIndividual(const Individual& individual){
+    _individuals.push_back(individual);
+}

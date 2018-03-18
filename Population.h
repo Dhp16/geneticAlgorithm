@@ -12,6 +12,8 @@ class Population
 
         Individual getFittestIndividual();
         int size() const;
+        void addIndividual(const Individual& individual);
+        Individual getIndividual(const unsigned int index);
 
     private:
         std::vector<Individual> _individuals;        
