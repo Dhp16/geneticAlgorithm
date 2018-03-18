@@ -35,15 +35,13 @@ Population Algorithm::evolvePopulation(Population population) {
 // selects best from a random subset of the population
 Individual Algorithm::tournamentSelection(Population population) {
 
-    Individual newIndividual;
-
     Population tournament(_tournamentSize, _length);
     for(unsigned int i = 0; i < _tournamentSize; ++i) {
         int randomIndex = (rand() % static_cast<int>(population.size() + 1));
         tournament.addIndividual(population.getIndividual(randomIndex));
     }
 
-    return newIndividual;
+    return tournament.getFittestIndividual();
 }
 
 Individual Algorithm::crossover(Individual individual1, Individual individual2) {
