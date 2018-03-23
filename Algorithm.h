@@ -9,22 +9,24 @@ class Algorithm
 {
 
     public:
-        Algorithm(unsigned int length);
+      Algorithm(const unsigned int length, const double uniformRate,
+                const double mutationRate, const int tournamentSize,
+                const bool elitism);
 
-        Population evolvePopulation(const Population& population);
-        
-        Individual tournamentSelection(const Population& population);
+      void evolvePopulation(Population &population);
 
-        Individual crossover(const Individual& individual1, const Individual& individual2);
-        void mutate(Individual& individual);
+      Individual tournamentSelection(const Population &population);
+
+      Individual crossover(const Individual &individual1, const Individual &individual2);
+      void mutate(Individual &individual);
 
     private:
     
         unsigned int _length;
-        double _uniformRate = 0.5;
-        double _mutationRate = 0.002;
-        int _tournamentSize = 15;
-        bool elitism = false;
+        double _uniformRate;
+        double _mutationRate;
+        int _tournamentSize;
+        bool _elitism;
 };
 
 

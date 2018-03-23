@@ -11,17 +11,20 @@ inline double rand01()
     return ((double)rand() / (RAND_MAX));
 }
 
-Algorithm::Algorithm(unsigned int length) : _length(length)
-{
-}
+Algorithm::Algorithm(const unsigned int length,const double uniformRate, 
+                     const double mutationRate, const int tournamentSize,
+                     const bool elitism) : 
+                     _length(length), _uniformRate(uniformRate),
+                    _mutationRate(mutationRate), _tournamentSize(tournamentSize)
+{}
 
-Population Algorithm::evolvePopulation(const Population& population)
+void Algorithm::evolvePopulation(Population& population)
 {
     // breeding phase
     Population newPopulation;
 
     int offset = 0;
-    if (elitism) {
+    if (_elitism) {
         newPopulation.addIndividual(population.getFittestIndividual());
         offset++;
     }
@@ -40,8 +43,7 @@ Population Algorithm::evolvePopulation(const Population& population)
         newPopulation.setIndividual(i, newIndividual); 
     }
     
-
-    return newPopulation;
+    population = newPopulation;
 }
 
 // selects best from a random subset of the population
