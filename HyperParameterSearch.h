@@ -2,17 +2,16 @@
 
 #include <utility>
 
-const int GLOBAL_LOGLEVEL = 1;
+const int GLOBAL_LOGLEVEL = 0;
 
 inline double rand01()
 {
     return ((double)rand() / (RAND_MAX));
 }
 
-void run(const unsigned int length, const unsigned int populationSize, 
-const double uniformRate, const double mutationRate, const int tournamentSize,
-const bool elitism) {
+void run(const unsigned int length, const HyperparameterSet& hyperParameters) {
     // initialise file writing for fitness plot:
+    
     std::ofstream myFile;
     myFile.open("Fitness.txt");
 
@@ -22,9 +21,9 @@ const bool elitism) {
         FitnessCalculation::printSolution();
     }
 
-    Population newPopulation(populationSize, length);
+    Population newPopulation(hyperParameters.getPopulationSize(), length);
     if(GLOBAL_LOGLEVEL > 1) {
-        std::cout << "First population: size: " << populationSize << "  length: " << length << std::endl;
+        std::cout << "First population: size: " << hyperParameters.getPopulationSize() << "  length: " << length << std::endl;
         if(GLOBAL_LOGLEVEL > 2) newPopulation.print();
         std::cout << "First population max fitness: " << newPopulation.getFittestIndividual().getFitness() << "\n" << std::endl;
     }
@@ -32,8 +31,8 @@ const bool elitism) {
 
     int generationCount = 0;
 
-    Algorithm algo(length, uniformRate, mutationRate, tournamentSize, elitism);
-    
+    Algorithm algo(length, hyperParameters);
+
     while(newPopulation.getFittestIndividual().getFitness() < FitnessCalculation::getMaxFitness()) {
        generationCount++;
        algo.evolvePopulation(newPopulation);
@@ -55,15 +54,13 @@ const bool elitism) {
         FitnessCalculation::printSolution();
     }
 
-
     std::cout << "\n\n\n" << std::endl;
 }
 
-double timedRun(const unsigned int length, const unsigned int populationSize, const double 
-uniformRate, const double mutationRate, const unsigned int tournamentSize, const bool elitism) {
+double timedRun(const unsigned int length, const HyperparameterSet& hyperParameters) {
 
     clock_t start = clock();
-    run(length, populationSize, uniformRate, mutationRate, tournamentSize, elitism);
+    run(length, hyperParameters);
     clock_t end = clock();
     double elapsedTime = double(end - start) / CLOCKS_PER_SEC;
     if(GLOBAL_LOGLEVEL > 0) std::cout << "Elapsed time: " << elapsedTime << std::endl;
@@ -83,6 +80,5 @@ void randomSearch(const unsigned int length) {
     for(unsigned int i = 0; i < 10; ++i) {
         HyperparameterSet set1(length, populationSizeRange,
         tournamentSizeRange, uniformRateRange, mutationRateRange);
-        set1.print();
     }
 }

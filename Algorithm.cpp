@@ -5,6 +5,7 @@
 
 #include "Individual.h"
 #include "Population.h"
+#include "HyperparameterSet.h"
 
 inline double rand01()
 {
@@ -18,6 +19,14 @@ Algorithm::Algorithm(const unsigned int length,const double uniformRate,
                     _mutationRate(mutationRate), _tournamentSize(tournamentSize)
 {}
 
+Algorithm::Algorithm(const unsigned int length, const HyperparameterSet& hyperParameters) : 
+                    _length(length), 
+                    _uniformRate(hyperParameters.getUniformRate()),
+                    _mutationRate(hyperParameters.getMutationRate()), 
+                    _tournamentSize(hyperParameters.getTournamentSize()), 
+                    _elitism(hyperParameters.getElitism())
+{}
+
 void Algorithm::evolvePopulation(Population& population)
 {
     // breeding phase
@@ -28,14 +37,12 @@ void Algorithm::evolvePopulation(Population& population)
         newPopulation.addIndividual(population.getFittestIndividual());
         offset++;
     }
-
     for (unsigned int i = offset; i < population.size(); ++i) {
         Individual individual1 = tournamentSelection(population);
         Individual individual2 = tournamentSelection(population);
         Individual newIndividual = crossover(individual1, individual2);
         newPopulation.addIndividual(newIndividual); 
     }
-
     // mutation phase
     for(unsigned int i = 0; i < population.size(); ++i) {
         Individual newIndividual = newPopulation.getIndividual(i);
@@ -55,7 +62,6 @@ Individual Algorithm::tournamentSelection(const Population& population)
         int randomIndex = (rand() % static_cast<int>(population.size()));
         tournament.addIndividual(population.getIndividual(randomIndex));
     }
-
     return tournament.getFittestIndividual();
 }
 

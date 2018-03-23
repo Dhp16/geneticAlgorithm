@@ -12,6 +12,6 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	 $(CC) $(INC) $(OBJ) $(CXXFLAGS) -o $(TARGET) $(LIBS) $(CURLLIB) 
 
-run: $(TARGET)
+run:$(TARGET)
 	./$(TARGET)
 	python3 plot.py

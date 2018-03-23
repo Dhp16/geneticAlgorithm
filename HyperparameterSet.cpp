@@ -21,12 +21,34 @@ HyperparameterSet::HyperparameterSet(const unsigned int length,
 HyperparameterSet::HyperparameterSet(const unsigned int length, const unsigned
  int populationSize, const unsigned int tournamentSize, 
  const double uniformRate, const double mutationRate,
-  bool elitism): _length(length), _populationSize(populationSize),
-  _uniformRate(uniformRate), _mutationRate(mutationRate)
+  bool elitism): _length(length), _populationSize(populationSize), 
+  _tournamentSize(tournamentSize),  _uniformRate(uniformRate),
+   _mutationRate(mutationRate)
 {}
 
+unsigned int HyperparameterSet::getPopulationSize() const
+{
+    return _populationSize;
+}
+unsigned int HyperparameterSet::getTournamentSize() const
+{
+    return _tournamentSize;
+}
+double HyperparameterSet::getMutationRate() const
+{
+    return _mutationRate;
+}
+double HyperparameterSet::getUniformRate() const
+{
+    return _uniformRate;
+}
+bool HyperparameterSet::getElitism() const
+{
+    return _elitism;
+}
+
 void 
-HyperparameterSet::print() {
+HyperparameterSet::print() const {
     std::cout << "population size: " << _populationSize << std::endl;
     std::cout << "tournament size: " << _tournamentSize << std::endl;
     std::cout << "uniform size: " << _uniformRate << std::endl;
@@ -46,8 +68,13 @@ const std::pair <double, double> mutationRateRange)
         populationRange.first, populationRange.second);
     _populationSize = populationDistribution(rng);
 
+    double tournamentSizeMax = tournamentSizeRange.second;
+    if(tournamentSizeRange.second > _populationSize) {
+        tournamentSizeMax =  _populationSize - 1;
+    }
+
     std::uniform_int_distribution<int> tournamentSizeDistribution(
-        tournamentSizeRange.first, tournamentSizeRange.second);
+        tournamentSizeRange.first, tournamentSizeMax);
     _tournamentSize = tournamentSizeDistribution(rng);
 
     std::uniform_real_distribution<double> uniformRateDistribution(

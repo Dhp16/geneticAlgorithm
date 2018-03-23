@@ -4,6 +4,7 @@
 
 class Individual;
 class Population;
+class HyperparameterSet;
 
 class Algorithm
 {
@@ -12,6 +13,9 @@ class Algorithm
       Algorithm(const unsigned int length, const double uniformRate,
                 const double mutationRate, const int tournamentSize,
                 const bool elitism);
+
+      Algorithm(const unsigned int length,
+      const HyperparameterSet& hyperParameters);
 
       void evolvePopulation(Population &population);
 

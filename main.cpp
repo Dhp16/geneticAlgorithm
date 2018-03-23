@@ -21,17 +21,18 @@ void SetupAndRun()
 {
     unsigned int length = 100;
 
-    unsigned int populationSize = 10;
+    unsigned int populationSize = 15;
     double uniformRate = 0.5;
     double mutationRate = 0.002;
     unsigned int tournamentSize = 3;
     bool elitism = false;
 
-    double elapsedTime = timedRun(length, populationSize, uniformRate, 
-    mutationRate, tournamentSize, elitism);
+    HyperparameterSet set(length, populationSize, tournamentSize, 
+    uniformRate, mutationRate, elitism);
+
+    double elapsedTime = timedRun(length, set);
 
     randomSearch(length);
-
 }
 
 int main()

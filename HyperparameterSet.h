@@ -19,7 +19,12 @@ class HyperparameterSet
 
     ~HyperparameterSet(){};
 
-    void print();
+    unsigned int getPopulationSize() const;
+    unsigned int getTournamentSize() const;
+    double getMutationRate() const;
+    double getUniformRate() const;
+    bool getElitism() const;
+    void print() const;
 
   private:
     void generateRandomMemberVariablesWithinRanges(
