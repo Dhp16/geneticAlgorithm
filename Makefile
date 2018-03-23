@@ -4,7 +4,7 @@ INC =
 LIBS = 
 CURLLIB=
 TARGET=bin
-OBJ=main.cpp Individual.cpp Population.cpp FitnessCalculation.cpp Algorithm.cpp
+OBJ=main.cpp Individual.cpp Population.cpp FitnessCalculation.cpp Algorithm.cpp HyperparameterSet.cpp
 
 default: $(TARGET)
 all: $(TARGET)
