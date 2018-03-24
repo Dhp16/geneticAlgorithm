@@ -3,6 +3,7 @@
 
 #include <utility>
 #include <random>
+#include <fstream>
 
 class HyperparameterSet
 {
@@ -25,6 +26,7 @@ class HyperparameterSet
     double getUniformRate() const;
     bool getElitism() const;
     void print() const;
+    void writeToFile(std::ofstream& file) const;
 
   private:
     void generateRandomMemberVariablesWithinRanges(

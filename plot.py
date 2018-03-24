@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 ## Import Data ##
 fitness = []
-with open("Fitness.txt") as file:
+with open("results/Fitness.txt") as file:
     for line in file:
         line = line.strip() 
         fitness.append(line)

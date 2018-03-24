@@ -19,7 +19,7 @@ void run(const unsigned int length, const HyperparameterSet& hyperParameters) {
     // initialise file writing for fitness plot:
     
     std::ofstream myFile;
-    myFile.open("Fitness.txt");
+    myFile.open("results/Fitness.txt");
 
     FitnessCalculation::generateASolution(length);
     if(GLOBAL_LOGLEVEL > 2) {
@@ -83,12 +83,15 @@ void randomSearch(const unsigned int length, const unsigned int iterations) {
     double, double>(0.0005,0.005));
 
 
-
-
-
+    std::ofstream parametersFile;
+    parametersFile.open("results/hyperparametersTested.txt");
+    parametersFile << length << std::endl;
+    
     HyperparameterSet bestParameters(length, populationSizeRange,
         tournamentSizeRange, uniformRateRange, mutationRateRange);
-    double minimumTime = timedRun(length, bestParameters);    
+    double minimumTime = timedRun(length, bestParameters);
+    bestParameters.writeToFile(parametersFile);
+    parametersFile << minimumTime << std::endl;
 
     for(unsigned int i = 1; i < iterations; ++i) {
         HyperparameterSet testParameters(length, populationSizeRange,
@@ -97,7 +100,11 @@ void randomSearch(const unsigned int length, const unsigned int iterations) {
         if(elapsedTime < minimumTime) {
             //bestParameters = testParameters;
             minimumTime = elapsedTime;
-        }     
+        }
+        bestParameters.writeToFile(parametersFile);
+        parametersFile << elapsedTime << std::endl;
     }
+    parametersFile.close();
+
     std::cout <<"Fastest operation: " << minimumTime << std::endl;
 }

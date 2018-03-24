@@ -56,6 +56,11 @@ HyperparameterSet::print() const {
 }
 
 void
+HyperparameterSet::writeToFile(std::ofstream& file) const {
+    file << _populationSize << " " << _tournamentSize << " " << _uniformRate << " " << _mutationRate << " " << _elitism << " ";
+}
+
+void
 HyperparameterSet::generateRandomMemberVariablesWithinRanges(
 const std::pair < unsigned int, unsigned int> populationRange, 
 const std::pair < unsigned int, unsigned int> tournamentSizeRange, 
