@@ -8,29 +8,22 @@ class HyperparameterSet;
 
 class Algorithm
 {
-
     public:
-      Algorithm(const unsigned int length, const double uniformRate,
-                const double mutationRate, const int tournamentSize,
-                const bool elitism);
-
       Algorithm(const unsigned int length,
       const HyperparameterSet& hyperParameters);
 
       void evolvePopulation(Population &population);
 
-      Individual tournamentSelection(const Population &population);
-
-      Individual crossover(const Individual &individual1, const Individual &individual2);
+    private:
+      Individual tournamentSelection(const Population &population) const;
+      Individual crossover(const Individual &individual1, const Individual &individual2) const;
       void mutate(Individual &individual);
 
-    private:
-    
-        unsigned int _length;
-        double _uniformRate;
-        double _mutationRate;
-        int _tournamentSize;
-        bool _elitism;
+      unsigned int _length;
+      double _uniformRate;
+      double _mutationRate;
+      int _tournamentSize;
+      bool _elitism;
 };
 
 

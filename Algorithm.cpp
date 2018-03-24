@@ -12,12 +12,12 @@ inline double rand01()
     return ((double)rand() / (RAND_MAX));
 }
 
-Algorithm::Algorithm(const unsigned int length,const double uniformRate, 
-                     const double mutationRate, const int tournamentSize,
-                     const bool elitism) : 
-                     _length(length), _uniformRate(uniformRate),
-                    _mutationRate(mutationRate), _tournamentSize(tournamentSize)
-{}
+// Algorithm::Algorithm(const unsigned int length,const double uniformRate, 
+//                      const double mutationRate, const int tournamentSize,
+//                      const bool elitism) : 
+//                      _length(length), _uniformRate(uniformRate),
+//                     _mutationRate(mutationRate), _tournamentSize(tournamentSize)
+// {}
 
 Algorithm::Algorithm(const unsigned int length, const HyperparameterSet& hyperParameters) : 
                     _length(length), 
@@ -54,7 +54,7 @@ void Algorithm::evolvePopulation(Population& population)
 }
 
 // selects best from a random subset of the population
-Individual Algorithm::tournamentSelection(const Population& population)
+Individual Algorithm::tournamentSelection(const Population& population) const
 {
     Population tournament(_tournamentSize, _length);
     for (unsigned int i = 0; i < _tournamentSize; ++i)
@@ -65,7 +65,7 @@ Individual Algorithm::tournamentSelection(const Population& population)
     return tournament.getFittestIndividual();
 }
 
-Individual Algorithm::crossover(const Individual& individual1, const Individual& individual2)
+Individual Algorithm::crossover(const Individual& individual1, const Individual& individual2) const
 {
     Individual newIndividual(_length);
     for (unsigned int i = 0; i < _length; ++i)
