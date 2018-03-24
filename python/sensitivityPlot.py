@@ -11,7 +11,7 @@ def createListFrom(list, subElementIndex):
 ## Import Data ##
 tests = []
 
-with open("../results/hyperparametersTested.txt") as file:
+with open("results/hyperparametersTested.txt") as file:
     for line in file:
         parameters = line.split()
         parameters[-1] = parameters[-1].rstrip()
@@ -23,7 +23,7 @@ with open("../results/hyperparametersTested.txt") as file:
 
         tests.append(parameters)
 
-length = tests[0][0];
+length = tests[0][0]
 tests.pop(0)
 
 # order of the parameters: population size, 
@@ -42,6 +42,10 @@ allElitismPercentages = createListFrom(tests, 4)
 allGenerationCounts = createListFrom(tests, 5)
 allTimes = createListFrom(tests, 6)
 
+relativeTournamentSize = []
+for i in range(0, len(allTournamentSizes)):
+    relativeTournamentSize.append(float(allTournamentSizes[i])/float(allPopulations[i]))
+
 title = "Sensitivity to different hyperparameters for solution of length " + str(length)
 
 figure1 = plt.figure()
@@ -50,7 +54,7 @@ plt.suptitle(title, fontsize=16)
 graph1 = figure1.add_subplot(231)
 graph1.plot(allElitismPercentages, allTimes, 'o')
 
-graph1.set_xlabel('Elitisn [%]')
+graph1.set_xlabel('Elitism [%]')
 graph1.set_ylabel('time (s)')
 
 figure1.patch.set_facecolor('white')
@@ -64,9 +68,9 @@ graph2.set_ylabel('time (s)')
 
 ### plot 3 ###
 graph3 = figure1.add_subplot(233)
-graph3.plot(allTournamentSizes, allTimes, 'o')
+graph3.plot(relativeTournamentSize, allTimes, 'o')
 
-graph3.set_xlabel('TournamentSize size [-]')
+graph3.set_xlabel('Tournament size [% of population size]')
 graph3.set_ylabel('time (s)')
 
 ### plot 4 ###
