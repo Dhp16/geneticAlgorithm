@@ -2,7 +2,7 @@
 
 #include <utility>
 
-const int GLOBAL_LOGLEVEL = 0;
+const int GLOBAL_LOGLEVEL = 1;
 
 inline double rand01()
 {
@@ -53,8 +53,7 @@ void run(const unsigned int length, const HyperparameterSet& hyperParameters) {
         std::cout << "Initial solution: ";
         FitnessCalculation::printSolution();
     }
-
-    std::cout << "\n\n\n" << std::endl;
+    if(GLOBAL_LOGLEVEL > 1)std::cout << "\n\n\n" << std::endl;
 }
 
 double timedRun(const unsigned int length, const HyperparameterSet& hyperParameters) {
@@ -67,7 +66,7 @@ double timedRun(const unsigned int length, const HyperparameterSet& hyperParamet
     return elapsedTime;
 }
 
-void randomSearch(const unsigned int length) {
+void randomSearch(const unsigned int length, const unsigned int iterations) {
     std::pair<unsigned int, unsigned int> populationSizeRange(
         std::pair<unsigned int, unsigned int>(10, 50));
     std::pair<unsigned int, unsigned int> tournamentSizeRange(
@@ -77,8 +76,18 @@ void randomSearch(const unsigned int length) {
     std::pair<double,double> mutationRateRange(std::pair<
     double, double>(0.0005,0.005));
 
-    for(unsigned int i = 0; i < 10; ++i) {
-        HyperparameterSet set1(length, populationSizeRange,
+    HyperparameterSet bestParameters(length, populationSizeRange,
         tournamentSizeRange, uniformRateRange, mutationRateRange);
+    double minimumTime = timedRun(length, bestParameters);    
+
+    for(unsigned int i = 1; i < iterations; ++i) {
+        HyperparameterSet testParameters(length, populationSizeRange,
+        tournamentSizeRange, uniformRateRange, mutationRateRange);
+        double elapsedTime = timedRun(length, testParameters);   
+        if(elapsedTime < minimumTime) {
+            //bestParameters = testParameters;
+            minimumTime = elapsedTime;
+        }     
     }
+    std::cout <<"Fastest operation: " << minimumTime << std::endl;
 }

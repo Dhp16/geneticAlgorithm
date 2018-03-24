@@ -30,9 +30,9 @@ void SetupAndRun()
     HyperparameterSet set(length, populationSize, tournamentSize, 
     uniformRate, mutationRate, elitism);
 
-    double elapsedTime = timedRun(length, set);
+    //double elapsedTime = timedRun(length, set);
 
-    randomSearch(length);
+    randomSearch(length, 100);
 }
 
 int main()
