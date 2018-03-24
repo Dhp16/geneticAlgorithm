@@ -12,13 +12,6 @@ inline double rand01()
     return ((double)rand() / (RAND_MAX));
 }
 
-// Algorithm::Algorithm(const unsigned int length,const double uniformRate, 
-//                      const double mutationRate, const int tournamentSize,
-//                      const bool elitism) : 
-//                      _length(length), _uniformRate(uniformRate),
-//                     _mutationRate(mutationRate), _tournamentSize(tournamentSize)
-// {}
-
 Algorithm::Algorithm(const unsigned int length, const HyperparameterSet& hyperParameters) : 
                     _length(length), 
                     _uniformRate(hyperParameters.getUniformRate()),

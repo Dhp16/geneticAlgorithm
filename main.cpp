@@ -15,30 +15,16 @@
 #include "Population.h"
 #include "FitnessCalculation.h"
 #include "Algorithm.h"
-#include "HyperParameterSearch.h"
+#include "HyperparameterSearch.h"
 
 void SetupAndRun()
 {
     unsigned int length = 100;
-
-    unsigned int populationSize = 15;
-    double uniformRate = 0.5;
-    double mutationRate = 0.002;
-    unsigned int tournamentSize = 3;
-    bool elitism = false;
-
-    HyperparameterSet set(length, populationSize, tournamentSize, 
-    uniformRate, mutationRate, elitism);
-
-    //double elapsedTime = timedRun(length, set);
-
     randomSearch(length, 100);
 }
 
 int main()
 {
-    //tester();
     SetupAndRun();
-
     return 0;
 }
