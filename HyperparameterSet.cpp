@@ -7,18 +7,19 @@ HyperparameterSet::HyperparameterSet(const unsigned int length,
                   const std::pair < unsigned int, unsigned int> populationRange, 
                   const std::pair<unsigned int, unsigned int> tournamentSizeRange,
                   const std::pair<double, double> uniformRateRange,
-                  const std::pair<double, double> mutationRateRange): _length(length)
+                  const std::pair<double, double> mutationRateRange, 
+                  const std::pair<double, double> elitismRange): _length(length)
 {
     generateRandomMemberVariablesWithinRanges(populationRange, tournamentSizeRange,
-    uniformRateRange, mutationRateRange);
+    uniformRateRange, mutationRateRange, elitismRange);
 }
 
 HyperparameterSet::HyperparameterSet(const unsigned int length, const unsigned
  int populationSize, const unsigned int tournamentSize, 
  const double uniformRate, const double mutationRate,
-  bool elitism): _length(length), _populationSize(populationSize), 
+  const double elitism): _length(length), _populationSize(populationSize), 
   _tournamentSize(tournamentSize),  _uniformRate(uniformRate),
-   _mutationRate(mutationRate)
+   _mutationRate(mutationRate), _elitism(elitism)
 {}
 
 unsigned int HyperparameterSet::getPopulationSize() const
@@ -37,7 +38,7 @@ double HyperparameterSet::getUniformRate() const
 {
     return _uniformRate;
 }
-bool HyperparameterSet::getElitism() const
+double HyperparameterSet::getElitism() const
 {
     return _elitism;
 }
@@ -48,6 +49,7 @@ HyperparameterSet::print() const {
     std::cout << "tournament size: " << _tournamentSize << std::endl;
     std::cout << "uniform size: " << _uniformRate << std::endl;
     std::cout << "mutation size: " << _mutationRate << std::endl;
+    std::cout << "elitism percentage: " << _elitism << std::endl;
 }
 
 void
@@ -60,7 +62,8 @@ HyperparameterSet::generateRandomMemberVariablesWithinRanges(
 const std::pair < unsigned int, unsigned int> populationRange, 
 const std::pair < unsigned int, unsigned int> tournamentSizeRange, 
 const std::pair <double, double> uniformRateRange,
-const std::pair <double, double> mutationRateRange)
+const std::pair <double, double> mutationRateRange, 
+const std::pair <double, double> elitismRange)
 {       
     std::mt19937 rng(_rd());      
 
@@ -84,7 +87,8 @@ const std::pair <double, double> mutationRateRange)
         mutationRateRange.first, mutationRateRange.second);
     _mutationRate = mutationRateDistribution(rng);
 
-    std::uniform_int_distribution<int> elitismDistribution(0,1);
+    std::uniform_real_distribution<double> elitismDistribution(
+        elitismRange.first,elitismRange.second);
     _elitism = elitismDistribution(rng);
 }
 

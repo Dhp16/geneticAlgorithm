@@ -16,7 +16,7 @@ with open("../results/hyperparametersTested.txt") as file:
         parameters = line.split()
         parameters[-1] = parameters[-1].rstrip()
         for i in range(0, len(parameters)):
-            if(i < 2 or i == 4 or i == 5):
+            if(i < 2 or i == 5):
                 parameters[i] = int(parameters[i])
             else:
                 parameters[i] = float(parameters[i])
@@ -38,21 +38,9 @@ allPopulations = createListFrom(tests, 0)
 allTournamentSizes = createListFrom(tests, 1)
 allUniformRates = createListFrom(tests, 2)
 allMutationRates = createListFrom(tests, 3)
+allElitismPercentages = createListFrom(tests, 4)
 allGenerationCounts = createListFrom(tests, 5)
 allTimes = createListFrom(tests, 6)
-
-
-withElitism = [] 
-withoutElitism = []
-
-for parameterSet in tests:
-    if(parameterSet[4] == 1):
-        withElitism.append(parameterSet)
-    else:
-        withoutElitism.append(parameterSet)
-
-timeWithElitism = createListFrom(withElitism, 6)
-timeWithoutElitism = createListFrom(withoutElitism, 6)
 
 title = "Sensitivity to different hyperparameters for solution of length " + str(length)
 
@@ -60,14 +48,12 @@ figure1 = plt.figure()
 plt.suptitle(title, fontsize=16)
 
 graph1 = figure1.add_subplot(231)
-graph1.plot(timeWithElitism, 'o', label='elitism')
-graph1.plot(timeWithoutElitism, '*', label='no elitism')
+graph1.plot(allElitismPercentages, allTimes, 'o')
 
-graph1.set_xlabel('iteration number [-]')
+graph1.set_xlabel('Elitisn [%]')
 graph1.set_ylabel('time (s)')
 
 figure1.patch.set_facecolor('white')
-graph1.legend(loc=1)
 
 ### plot 2 ###
 graph2 = figure1.add_subplot(232)

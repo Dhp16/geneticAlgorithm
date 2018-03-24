@@ -76,13 +76,15 @@ double timedRun(const unsigned int length, const HyperparameterSet& hyperParamet
 
 void randomSearch(const unsigned int length, const unsigned int iterations) {
     std::pair<unsigned int, unsigned int> populationSizeRange(
-        std::pair<unsigned int, unsigned int>(10, 50));
+        std::pair<unsigned int, unsigned int>(5, 100));
     std::pair<unsigned int, unsigned int> tournamentSizeRange(
-        std::pair<unsigned int, unsigned int>(4, 20));
+        std::pair<unsigned int, unsigned int>(2, 40));
     std::pair<double,double> uniformRateRange(std::pair<
-    double,double>(0.3, 0.7));    
+    double,double>(0.2, 0.8));    
     std::pair<double,double> mutationRateRange(std::pair<
     double, double>(0.0005,0.005));
+    std::pair<double,double> elitismRange(std::pair<
+    double, double>(1,30));
 
     std::ofstream parametersFile;
     parametersFile.open("results/hyperparametersTested.txt");
@@ -90,7 +92,7 @@ void randomSearch(const unsigned int length, const unsigned int iterations) {
     
     unsigned int generationsRequired;
     HyperparameterSet bestParameters(length, populationSizeRange,
-        tournamentSizeRange, uniformRateRange, mutationRateRange);
+        tournamentSizeRange, uniformRateRange, mutationRateRange, elitismRange);
     double minimumTime = timedRun(length, bestParameters, generationsRequired);
     bestParameters.writeToFile(parametersFile);
     parametersFile << generationsRequired << " " << minimumTime << std::endl;
@@ -98,7 +100,7 @@ void randomSearch(const unsigned int length, const unsigned int iterations) {
     for(unsigned int i = 1; i < iterations; ++i) {
         std::cout << "i: " << i << " ";
         HyperparameterSet testParameters(length, populationSizeRange,
-        tournamentSizeRange, uniformRateRange, mutationRateRange);
+        tournamentSizeRange, uniformRateRange, mutationRateRange, elitismRange);
         double elapsedTime = timedRun(length, testParameters, generationsRequired);   
         if(elapsedTime < minimumTime) {
             //bestParameters = testParameters;

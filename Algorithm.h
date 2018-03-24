@@ -23,7 +23,7 @@ class Algorithm
       double _uniformRate;
       double _mutationRate;
       int _tournamentSize;
-      bool _elitism;
+      double _elitism;
 };
 
 

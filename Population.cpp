@@ -1,6 +1,7 @@
 #include "Population.h"
 
 #include <iostream>
+#include <algorithm>
 
 Population::Population()
 {
@@ -32,6 +33,20 @@ Individual Population::getFittestIndividual() const
     return _individuals[indexForStrongestIndividual];
 }
 
+std::vector<Individual> Population::getPercentFittest(const double percentFittest) 
+{
+    int nFittest = int(percentFittest/100*this->size());
+    if(nFittest < 1) {
+        nFittest = 1;
+    }
+    std::vector<Individual> fittestIndividuals = _individuals;
+    std::sort(fittestIndividuals.begin(), fittestIndividuals.end());
+    int nToErase = this->size() - nFittest;
+    fittestIndividuals.erase(fittestIndividuals.begin(), fittestIndividuals.begin() + nToErase);
+    return fittestIndividuals;
+}
+
+
 Individual Population::getIndividual(const unsigned int index) const {
     return _individuals[index];
 }
@@ -42,6 +57,11 @@ int Population::size() const {
 
 void Population::addIndividual(const Individual& individual){
     _individuals.push_back(individual);
+}
+void Population::addIndividuals(const std::vector<Individual>& individuals){
+    for(unsigned int i = 0; i < individuals.size(); ++i) {
+        _individuals.push_back(individuals[i]);
+    }
 }
 
 void Population::print() const

@@ -14,4 +14,4 @@ $(TARGET): $(OBJ)
 
 run:$(TARGET)
 	./$(TARGET)
-	results/python3 sensitivityPlot.py
+	./results/python3 sensitivityPlot.py	 

@@ -23,6 +23,9 @@ class Individual {
     bool operator[](unsigned int x) const{
       return _chromosome[x];
     }
+    bool operator<(Individual& j) { 
+      return (this->getFitness()<j.getFitness());
+    }
 
   private:
     const static int _geneLength = 15;

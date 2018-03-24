@@ -25,12 +25,10 @@ void Algorithm::evolvePopulation(Population& population)
     // breeding phase
     Population newPopulation;
 
-    int offset = 0;
-    if (_elitism) {
-        newPopulation.addIndividual(population.getFittestIndividual());
-        offset++;
-    }
-    for (unsigned int i = offset; i < population.size(); ++i) {
+    std::vector<Individual> fittestIndividuals =  population.getPercentFittest(_elitism);
+    newPopulation.addIndividuals(fittestIndividuals);
+
+    for (unsigned int i = fittestIndividuals.size(); i < population.size(); ++i) {
         Individual individual1 = tournamentSelection(population);
         Individual individual2 = tournamentSelection(population);
         Individual newIndividual = crossover(individual1, individual2);

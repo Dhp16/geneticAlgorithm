@@ -11,12 +11,13 @@ class HyperparameterSet
     HyperparameterSet(const unsigned int length, const std::pair<unsigned int, 
     unsigned int> populationRange, std::pair<unsigned int, unsigned int> 
     tournamentSizeRange, const std::pair<double, double> uniformRateRange,
-                      const std::pair<double, double> mutationRateRange);
+                      const std::pair<double, double> mutationRateRange,
+                      const std::pair<double, double> elitismRange);
 
     HyperparameterSet(const unsigned int length, const unsigned int populationSize,
                       const unsigned int tournamentSize, 
                       const double uniformRate, const double mutationRate, 
-                      const bool elitism);
+                      const double elitism);
 
     ~HyperparameterSet(){};
 
@@ -24,7 +25,7 @@ class HyperparameterSet
     unsigned int getTournamentSize() const;
     double getMutationRate() const;
     double getUniformRate() const;
-    bool getElitism() const;
+    double getElitism() const;
     void print() const;
     void writeToFile(std::ofstream& file) const;
 
@@ -33,7 +34,8 @@ class HyperparameterSet
         const std::pair<unsigned int, unsigned int> populationRange,
         const std::pair<unsigned int, unsigned int> tournamentSizeRange,
         const std::pair<double, double> uniformRateRange,
-        const std::pair<double, double> mutationRateRange);
+        const std::pair<double, double> mutationRateRange, 
+        const std::pair<double, double> elitismRange);
 
     unsigned int _length;
 
@@ -42,7 +44,7 @@ class HyperparameterSet
 
     double _mutationRate;
     double _uniformRate;
-    bool _elitism;
+    double _elitism;
 
     std::random_device _rd; 
 };
