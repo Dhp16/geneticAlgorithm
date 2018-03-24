@@ -1,8 +1,8 @@
-//    Part this code is a replica from that shared here:
+//    Part of this code is a replica of that shared here:
 //    http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
-//    except that this is c++ and the one above is Java.    
+//    Though this is C++ as oppposed to Java.    
 //    I was looking for a starting point to learn about GAs
-//    All credit to: Lee from theprojectspot.com whom I thank for very clear introductory code 
+//    Credit to: Lee from theprojectspot.com, whom I thank for very clear introductory code 
 //    for genetic algorithms.
 //    I later added a random search of the optimal hyperparameters, plotting their influence on
 //    the total time in python.
