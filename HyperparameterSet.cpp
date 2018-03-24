@@ -3,11 +3,6 @@
 #include <ctime>
 #include <iostream>
 
-inline double rand01()
-{
-    return ((double)rand() / (RAND_MAX));
-}
-
 HyperparameterSet::HyperparameterSet(const unsigned int length, 
                   const std::pair < unsigned int, unsigned int> populationRange, 
                   const std::pair<unsigned int, unsigned int> tournamentSizeRange,
@@ -77,7 +72,6 @@ const std::pair <double, double> mutationRateRange)
     if(tournamentSizeRange.second > _populationSize) {
         tournamentSizeMax =  _populationSize - 1;
     }
-
     std::uniform_int_distribution<int> tournamentSizeDistribution(
         tournamentSizeRange.first, tournamentSizeMax);
     _tournamentSize = tournamentSizeDistribution(rng);
@@ -90,7 +84,8 @@ const std::pair <double, double> mutationRateRange)
         mutationRateRange.first, mutationRateRange.second);
     _mutationRate = mutationRateDistribution(rng);
 
-    _elitism = rand01();
+    std::uniform_int_distribution<int> elitismDistribution(0,1);
+    _elitism = elitismDistribution(rng);
 }
 
 

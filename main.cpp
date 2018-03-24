@@ -19,8 +19,8 @@
 
 void SetupAndRun()
 {
-    unsigned int length = 100;
-    unsigned int iterations = 25;
+    unsigned int length = 200;
+    unsigned int iterations = 1000;
     randomSearch(length, iterations);
 }
 

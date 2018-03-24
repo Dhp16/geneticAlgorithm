@@ -15,7 +15,7 @@ inline double rand01()
     return ((double)rand() / (RAND_MAX));
 }
 
-void run(const unsigned int length, const HyperparameterSet& hyperParameters) {
+unsigned int run(const unsigned int length, const HyperparameterSet& hyperParameters) {
     // initialise file writing for fitness plot:
     
     std::ofstream myFile;
@@ -60,12 +60,14 @@ void run(const unsigned int length, const HyperparameterSet& hyperParameters) {
         FitnessCalculation::printSolution();
     }
     if(GLOBAL_LOGLEVEL > 1)std::cout << "\n\n\n" << std::endl;
+
+    return generationCount;
 }
 
-double timedRun(const unsigned int length, const HyperparameterSet& hyperParameters) {
+double timedRun(const unsigned int length, const HyperparameterSet& hyperParameters, unsigned int& generationsRequired) {
 
     clock_t start = clock();
-    run(length, hyperParameters);
+    generationsRequired = run(length, hyperParameters);
     clock_t end = clock();
     double elapsedTime = double(end - start) / CLOCKS_PER_SEC;
     if(GLOBAL_LOGLEVEL > 0) std::cout << "Elapsed time: " << elapsedTime << std::endl;
@@ -82,27 +84,28 @@ void randomSearch(const unsigned int length, const unsigned int iterations) {
     std::pair<double,double> mutationRateRange(std::pair<
     double, double>(0.0005,0.005));
 
-
     std::ofstream parametersFile;
     parametersFile.open("results/hyperparametersTested.txt");
     parametersFile << length << std::endl;
     
+    unsigned int generationsRequired;
     HyperparameterSet bestParameters(length, populationSizeRange,
         tournamentSizeRange, uniformRateRange, mutationRateRange);
-    double minimumTime = timedRun(length, bestParameters);
+    double minimumTime = timedRun(length, bestParameters, generationsRequired);
     bestParameters.writeToFile(parametersFile);
-    parametersFile << minimumTime << std::endl;
+    parametersFile << generationsRequired << " " << minimumTime << std::endl;
 
     for(unsigned int i = 1; i < iterations; ++i) {
+        std::cout << "i: " << i << " ";
         HyperparameterSet testParameters(length, populationSizeRange,
         tournamentSizeRange, uniformRateRange, mutationRateRange);
-        double elapsedTime = timedRun(length, testParameters);   
+        double elapsedTime = timedRun(length, testParameters, generationsRequired);   
         if(elapsedTime < minimumTime) {
             //bestParameters = testParameters;
             minimumTime = elapsedTime;
         }
-        bestParameters.writeToFile(parametersFile);
-        parametersFile << elapsedTime << std::endl;
+        testParameters.writeToFile(parametersFile);
+        parametersFile << generationsRequired << " " << elapsedTime << std::endl;
     }
     parametersFile.close();
 
